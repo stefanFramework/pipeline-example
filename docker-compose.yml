@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  php:
+    build: ./env/php
+    container_name: php
+    volumes:
+      - ./src:/var/www/html/
+
+  apache:
+    build: ./env/apache
+    container_name: apache
+    depends_on:
+      - php
+    ports:
+      - 7560:80
+    volumes:
+      # Mounting your app on the volume
+      - ./src/:/var/www/html/
