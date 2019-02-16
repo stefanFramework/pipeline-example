@@ -1,11 +1,11 @@
 <?php
-namespace Workflow;
+namespace Lib\Pipeline;
 
-class WorkflowActivity
+class PipelineStep
 {
     private $context;
 
-    public function __construct(WorkflowContext $context)
+    public function __construct(PipelineContext $context)
     {
         $this->context = $context;
     }
