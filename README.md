@@ -9,6 +9,6 @@ Pre requisites:
 Instalation:
 
 - Once you've cloned the repo, go to repo's directory and type `docker-compose up`
-- Once yout've seen apache output, test initialization by typing `http://localhost:7560/example/hello'` on your web browser
+- Once yout've seen apache output, test initialization by typing `http://localhost:7560/example/hello` on your web browser
 - If you obtained a "hello!" back, then it's all up and running!
 - To run the Pipeline example go to `\example\checkout`
