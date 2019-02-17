@@ -3,13 +3,13 @@ version: '3'
 services:
   php:
     build: ./env/php
-    container_name: php
+    container_name: php_pipeline
     volumes:
       - ./src:/var/www/html/
 
   apache:
     build: ./env/apache
-    container_name: apache
+    container_name: apache_pipeline
     depends_on:
       - php
     ports:

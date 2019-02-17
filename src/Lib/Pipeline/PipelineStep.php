@@ -3,7 +3,8 @@ namespace Lib\Pipeline;
 
 class PipelineStep
 {
-    private $context;
+    /** @var PipelineContext */
+    protected $context;
 
     public function __construct(PipelineContext $context)
     {

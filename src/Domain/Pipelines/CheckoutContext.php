@@ -8,7 +8,6 @@
 
 namespace Domain\Pipelines;
 
-
 use Domain\Entities\Transaction;
 use Lib\Pipeline\PipelineContext;
 
@@ -16,4 +15,14 @@ class CheckoutContext extends PipelineContext
 {
     /** @var Transaction */
     public $transaction;
+
+    public $operationNumber;
+
+    public $paymentInformation;
+
+    public $personInformation;
+
+    public $billingInformation;
+
+    public $shippingInformation;
 }

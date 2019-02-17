@@ -2,7 +2,7 @@
 
 function loadModule($directory)
 {
-    foreach (glob($directory) as $lib) {
+    foreach (glob($directory . '/*.php') as $lib) {
         if (!file_exists($lib)) {
             die($lib . ' not found');
         }
@@ -11,7 +11,10 @@ function loadModule($directory)
     }
 }
 
-loadModule('Controllers/*.php');
+loadModule('App/Controllers');
+loadModule('App/Helpers');
+loadModule('Domain/Entities');
+loadModule('Domain/Services');
 
 $url = filter_input(INPUT_GET, "url");
 $urlArray = explode("/", $url);
@@ -22,7 +25,7 @@ $action = $urlArray[0];
 array_shift($urlArray);
 $arguments = $urlArray;
 
-$controller = "Controllers\\" . $controllerName . "Controller";
+$controller = "App\\Controllers\\" . $controllerName . "Controller";
 $obj = new $controller();
 
 if (!method_exists($obj, $action)) {

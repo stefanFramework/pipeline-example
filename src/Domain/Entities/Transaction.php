@@ -26,9 +26,13 @@ class Transaction
 
     public function __construct()
     {
-        $this->id = rand(100, 10000);
-        $this->date = new \DateTime('now');
+        $this->date = '2019-01-01 10:00:00';
         $this->transactionStatus = TransactionStatus::started();
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function setPerson(Person $person)
@@ -49,6 +53,11 @@ class Transaction
     public function setShippingAddress(Address $shippingAddress)
     {
         $this->shippingAddress = $shippingAddress;
+    }
+
+    public function setTransactionStatus(TransactionStatus $status)
+    {
+        $this->transactionStatus = $status;
     }
 
     public function getId()
@@ -79,5 +88,10 @@ class Transaction
     public function getShippingAddress()
     {
         return $this->shippingAddress;
+    }
+
+    public function getTransactionStatus()
+    {
+        return $this->transactionStatus;
     }
 }
