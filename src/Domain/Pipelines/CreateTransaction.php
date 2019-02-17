@@ -4,6 +4,7 @@
 namespace Domain\Pipelines;
 
 
+use Domain\Entities\Address;
 use Domain\Entities\Person;
 use Domain\Entities\Product;
 use Domain\Entities\Transaction;
@@ -14,6 +15,8 @@ class CreateTransaction extends PipelineStep
     public function validate()
     {
         $operationNumber = $this->context->operationNumber;
+        $shippingInformation = $this->context->shippingInformation;
+        $billingInformation = $this->context->billingInformation;
         $personInformation = $this->context->personInformation;
         $productInformation = $this->context->productInformation;
 
@@ -28,6 +31,14 @@ class CreateTransaction extends PipelineStep
         if (empty($productInformation)) {
             throw new \Exception('Could not create Product: Insufficient information');
         }
+
+        if (empty($billingInformation)) {
+            throw new \Exception('Billing Information is required');
+        }
+
+        if (empty($shippingInformation)) {
+            throw new \Exception('Shipping Information is required');
+        }
     }
 
     public function execute()
@@ -35,9 +46,13 @@ class CreateTransaction extends PipelineStep
         $transaction =$this->createTransaction();
         $person = $this->createPerson();
         $product = $this->createProduct();
+        $billingAddress = $this->createBillingAddress();
+        $shippingAddress = $this->createShippingAddress();
 
         $transaction->setPerson($person);
         $transaction->setProduct($product);
+        $transaction->setBillingAddress($billingAddress);
+        $transaction->setShippingAddress($shippingAddress);
 
         $this->context->transaction = $transaction;
     }
@@ -74,5 +89,32 @@ class CreateTransaction extends PipelineStep
         $product->price = $productInformation['price'];
 
         return $product;
+    }
+
+    private function createBillingAddress()
+    {
+        $billingInformation = $this->context->billingInformation;
+
+        $address = new Address();
+        $address->street = $billingInformation['street'];
+        $address->streetNumber = $billingInformation['street_number'];
+        $address->city = $billingInformation['city'];
+        $address->zipCode = $billingInformation['zip_code'];
+
+        return $address;
+    }
+
+    private function createShippingAddress()
+    {
+        $shippingInformation = $this->context->shippingInformation;
+
+        $address = new Address();
+        $address->street = $shippingInformation['street'];
+        $address->streetNumber = $shippingInformation['street_number'];
+        $address->city = $shippingInformation['city'];
+        $address->zipCode = $shippingInformation['zip_code'];
+
+        return $address;
+
     }
 }

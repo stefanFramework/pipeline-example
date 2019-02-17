@@ -3,8 +3,7 @@
 
 namespace Domain\Strategies;
 
-
-use PaymentInformationRecord;
+use Domain\ValueObjects\PaymentInformationRecord;
 
 class BankingPaymentStrategy implements IPaymentStrategy
 {

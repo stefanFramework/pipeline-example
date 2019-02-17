@@ -61,7 +61,7 @@ class ExampleController
         $ctx->operationNumber = $data['operation_number'];
         $ctx->personInformation = $data['person_information'];
         $ctx->productInformation = $data['product_information'];
-        $ctx->paymentInformation = $data['person_information'];
+        $ctx->paymentInformation = $data['payment_information'];
         $ctx->billingInformation = $data['billing_information'];
         $ctx->shippingInformation = $data['shipping_information'];
 
