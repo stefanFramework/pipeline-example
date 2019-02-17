@@ -8,9 +8,9 @@ use Domain\Entities\Transaction;
 use Domain\Entities\TransactionStatus;
 use Domain\Factories\PaymentStrategyFactory;
 use Domain\Services\PaymentService;
+use Domain\ValueObjects\PaymentInformationRecord;
 use Lib\Pipeline\PipelineContext;
 use Lib\Pipeline\PipelineStep;
-use PaymentInformationRecord;
 
 class PerformPayment extends PipelineStep
 {
@@ -25,6 +25,13 @@ class PerformPayment extends PipelineStep
 
     public function validate()
     {
+        /** @var Transaction $transaction */
+        $transaction = $this->context->transaction;
+
+        if (is_null($transaction) || is_null($transaction->getProduct())) {
+            throw new \Exception('Transaction and Product are required');
+        }
+
         $paymentInformation = $this->context->paymentInformation;
 
         if (empty($paymentInformation)) {
@@ -52,7 +59,11 @@ class PerformPayment extends PipelineStep
 
     private function generatePaymentInformationRecord($paymentInformationData)
     {
+        /** @var Transaction $tx */
+        $tx = $this->context->transaction;
+
         $record = new PaymentInformationRecord();
+        $record->price = $tx->getProduct()->price;
         $record->card = $paymentInformationData['card'];
         $record->number = $paymentInformationData['number'];
         $record->validTo = $paymentInformationData['valid_to'];

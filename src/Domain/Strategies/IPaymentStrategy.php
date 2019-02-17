@@ -1,10 +1,7 @@
 <?php
-
-
 namespace Domain\Strategies;
 
-
-use PaymentInformationRecord;
+use Domain\ValueObjects\PaymentInformationRecord;
 
 interface IPaymentStrategy
 {

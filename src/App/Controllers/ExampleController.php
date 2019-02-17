@@ -46,6 +46,7 @@ class ExampleController
     {
         $data = [];
         $data['operation_number'] = $this->seederHelper->generateOperationNumber();
+        $data['product_information'] = $this->seederHelper->seedProductInformation();
         $data['person_information'] = $this->seederHelper->seedPersonInformation();
         $data['payment_information'] = $this->seederHelper->seedPaymentInformation();
         $data['shipping_information'] = $this->seederHelper->seedShippingInformation();
@@ -59,6 +60,7 @@ class ExampleController
         $ctx = new CheckoutContext();
         $ctx->operationNumber = $data['operation_number'];
         $ctx->personInformation = $data['person_information'];
+        $ctx->productInformation = $data['product_information'];
         $ctx->paymentInformation = $data['person_information'];
         $ctx->billingInformation = $data['billing_information'];
         $ctx->shippingInformation = $data['shipping_information'];

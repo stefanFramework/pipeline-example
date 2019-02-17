@@ -4,7 +4,7 @@ namespace Domain\Services;
 
 
 use Domain\Strategies\IPaymentStrategy;
-use PaymentInformationRecord;
+use Domain\ValueObjects\PaymentInformationRecord;
 
 class PaymentService
 {

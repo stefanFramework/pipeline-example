@@ -18,6 +18,8 @@ class CheckoutContext extends PipelineContext
 
     public $operationNumber;
 
+    public $productInformation;
+
     public $paymentInformation;
 
     public $personInformation;

@@ -1,9 +1,9 @@
 <?php
-
+namespace Domain\ValueObjects;
 
 class PaymentInformationRecord
 {
-    public $type;
+    public $price;
     public $card;
     public $number;
     public $validTo;

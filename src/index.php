@@ -1,20 +1,5 @@
 <?php
-
-function loadModule($directory)
-{
-    foreach (glob($directory . '/*.php') as $lib) {
-        if (!file_exists($lib)) {
-            die($lib . ' not found');
-        }
-
-        require_once $lib;
-    }
-}
-
-loadModule('App/Controllers');
-loadModule('App/Helpers');
-loadModule('Domain/Entities');
-loadModule('Domain/Services');
+require_once 'autoload.php';
 
 $url = filter_input(INPUT_GET, "url");
 $urlArray = explode("/", $url);
@@ -26,6 +11,7 @@ array_shift($urlArray);
 $arguments = $urlArray;
 
 $controller = "App\\Controllers\\" . $controllerName . "Controller";
+
 $obj = new $controller();
 
 if (!method_exists($obj, $action)) {
@@ -33,50 +19,3 @@ if (!method_exists($obj, $action)) {
 }
 
 call_user_func_array(array($obj, $action), $arguments);
-
-
-
-//
-//class ECommerceContext extends \Pipeline\PipelineContext
-//{
-//    private $result = [];
-//
-//    public function getResult() {
-//        return $this->result;
-//    }
-//
-//    public function addResult($someResult) {
-//        $this->result[] = $someResult;
-//    }
-//}
-//
-//class CreateOrder extends \Pipeline\PipelineStep
-//{
-//    public function execute()
-//    {
-//
-//    }
-//}
-//
-//class PerformPayment
-//{
-//    public function __invoke(Context $ctx) {
-//        $ctx->addResult('Payment Successfull');
-//    }
-//}
-//
-//class GenerateInvoice
-//{
-//    public function __invoke(Context $ctx) {
-//        $ctx->addResult('Invoice Generated');
-//    }
-//}
-//
-//class NotifyClient
-//{
-//    public function __invoke(Context $ctx) {
-//        $ctx->addResult('Notification Email sent');
-//    }
-//}
-//
-//

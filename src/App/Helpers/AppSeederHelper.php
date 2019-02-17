@@ -18,6 +18,15 @@ class AppSeederHelper
         ];
     }
 
+    public function seedProductInformation()
+    {
+        return [
+            'name' => 'HP Notebook',
+            'description' => 'HP i3, 6 GB Ram, 120 GB SSD HD',
+            'price' => '15000'
+        ];
+    }
+
     public function seedPaymentInformation()
     {
         return [
